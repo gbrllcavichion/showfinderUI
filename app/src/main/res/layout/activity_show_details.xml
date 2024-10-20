@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background"
+    android:gravity="center_horizontal">
+
+    <!-- Cabeçalho de Imagem ou Placeholder -->
+    <ImageView
+        android:id="@+id/iv_show_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/ic_launcher_background" />
+
+    <!-- Texto do Nome do Artista -->
+    <TextView
+        android:id="@+id/tv_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artista"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingTop="8dp" />
+
+    <!-- Texto do Nome da Turnê -->
+    <TextView
+        android:id="@+id/tv_tour_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome da Turnê"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:paddingTop="4dp" />
+
+    <!-- Texto da Localização -->
+    <TextView
+        android:id="@+id/tv_show_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Localização"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF" />
+
+    <!-- Texto da Data -->
+    <TextView
+        android:id="@+id/tv_show_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:paddingTop="4dp" />
+
+</LinearLayout>
