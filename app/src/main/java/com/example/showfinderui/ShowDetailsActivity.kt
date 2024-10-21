@@ -3,6 +3,7 @@ package com.example.showfinderui
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 class ShowDetailsActivity : AppCompatActivity() {
 
@@ -10,13 +11,13 @@ class ShowDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_details)
 
-        val artistName = intent.getStringExtra("artist_name")
-        val tourName = intent.getStringExtra("tour_name")
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val tvArtistName: TextView = findViewById(R.id.tv_artist_name)
-        val tvTourName: TextView = findViewById(R.id.tv_tour_name)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
-        tvArtistName.text = artistName
-        tvTourName.text = tourName
     }
 }
