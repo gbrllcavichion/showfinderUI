@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class ShowDetailsActivity : AppCompatActivity() {
 
@@ -18,6 +20,15 @@ class ShowDetailsActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        val ticketList = listOf(
+            Ticket("JAN/22, 2025", "17H", "Pedreira Paulo Leminski", "R$ 0.00 - R$ 10.00", "Vendido por: Eventim"),
+            Ticket("JAN/22, 2025", "17H", "Pedreira Paulo Leminski", "R$ 0.00 - R$ 10.00", "Vendido por: Eventim")
+        )
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_tickets)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = TicketAdapter(ticketList)
 
     }
 }
