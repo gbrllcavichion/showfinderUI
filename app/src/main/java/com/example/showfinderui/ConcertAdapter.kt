@@ -1,11 +1,12 @@
-package com.example.showfinderui
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.showfinderui.Concert
+import com.example.showfinderui.R
 
 class ConcertAdapter(
     private val concertList: List<Concert>,
@@ -34,9 +35,23 @@ class ConcertAdapter(
             onItemClick(concert)
         }
 
-        // Caso tenha uma imagem, use Glide ou outra lib para carregar
-        // Glide.with(holder.concertImage.context).load(concert.imageUrl).into(holder.concertImage)
+        if (position == 0) {
+            Glide.with(holder.concertImage.context)
+                .load(R.drawable.twenty_one_pilots_1200x628)
+                .placeholder(R.drawable.menu_gallery_24)
+                .error(R.drawable.menu_gallery_24)
+                .into(holder.concertImage)
+            holder.concertImage.visibility = View.VISIBLE
+        } else {
+            Glide.with(holder.concertImage.context)
+                .load(R.drawable.menu_gallery_24)
+                .placeholder(R.drawable.menu_gallery_24)
+                .error(R.drawable.menu_gallery_24)
+                .into(holder.concertImage)
+            holder.concertImage.visibility = View.VISIBLE
+        }
     }
+
 
     override fun getItemCount(): Int {
         return concertList.size
