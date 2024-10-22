@@ -61,7 +61,7 @@
         android:id="@+id/iv_filter"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@android:drawable/ic_menu_search"
+        android:src="@drawable/filter_24"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp" />
@@ -70,18 +70,18 @@
         android:id="@+id/iv_heart"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@android:drawable/ic_menu_save"
+        android:src="@drawable/heart"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_bell"
         android:layout_marginTop="8dp" />
 
     <ImageView
         android:id="@+id/iv_bell"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@android:drawable/ic_menu_info_details"
+        android:src="@drawable/notifications_24"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
-        app:layout_constraintEnd_toStartOf="@id/iv_heart"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp" />
 
