@@ -12,11 +12,11 @@ class TicketAdapter(private val ticketList: List<Ticket>) :
 
     class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ticketDate: TextView = itemView.findViewById(R.id.tv_ticket_date)
+        val locationAbbreviation: TextView = itemView.findViewById(R.id.tv_location_abbreviation)
+        val dayOfWeek: TextView = itemView.findViewById(R.id.tv_day_of_week)
         val ticketTime: TextView = itemView.findViewById(R.id.tv_ticket_time)
         val ticketLocation: TextView = itemView.findViewById(R.id.tv_ticket_location)
         val ticketPrice: TextView = itemView.findViewById(R.id.tv_ticket_price)
-        val ticketSeller: TextView = itemView.findViewById(R.id.tv_ticket_seller)
-        val arrowIcon: ImageView = itemView.findViewById(R.id.iv_arrow)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
@@ -27,10 +27,11 @@ class TicketAdapter(private val ticketList: List<Ticket>) :
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
         val ticket = ticketList[position]
         holder.ticketDate.text = ticket.date
+        holder.locationAbbreviation.text = ticket.abbreviation
+        holder.dayOfWeek.text = ticket.weekDay
         holder.ticketTime.text = ticket.time
         holder.ticketLocation.text = ticket.location
         holder.ticketPrice.text = ticket.price
-        holder.ticketSeller.text = ticket.seller
     }
 
     override fun getItemCount(): Int {
