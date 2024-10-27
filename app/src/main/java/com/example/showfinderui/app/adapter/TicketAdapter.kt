@@ -1,11 +1,12 @@
-package com.example.showfinderui
+package com.example.showfinderui.app.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.showfinderui.R
+import com.example.showfinderui.app.model.Ticket
 
 class TicketAdapter(private val ticketList: List<Ticket>) :
     RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {

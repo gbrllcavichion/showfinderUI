@@ -1,4 +1,4 @@
-package com.example.showfinderui
+package com.example.showfinderui.app.model
 
 data class Concert(
     val artistName: String,

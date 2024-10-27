@@ -1,11 +1,13 @@
-package com.example.showfinderui
+package com.example.showfinderui.app.activity
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.showfinderui.R
+import com.example.showfinderui.app.model.Ticket
+import com.example.showfinderui.app.adapter.TicketAdapter
 
 class ShowDetailsActivity : AppCompatActivity() {
 
