@@ -1,3 +1,5 @@
+package com.example.showfinderui.adapter
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -5,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.showfinderui.Concert
+import com.example.showfinderui.model.Concert
 import com.example.showfinderui.R
 
 class ConcertAdapter(

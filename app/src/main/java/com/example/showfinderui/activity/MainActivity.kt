@@ -1,11 +1,14 @@
-package com.example.showfinderui
+package com.example.showfinderui.activity
 
-import ConcertAdapter
+import com.example.showfinderui.adapter.ConcertAdapter
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.showfinderui.R
+import com.example.showfinderui.model.Concert
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
