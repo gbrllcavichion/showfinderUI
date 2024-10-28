@@ -1,5 +1,6 @@
 package com.example.showfinderui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.showfinderui.model.Concert
 import com.example.showfinderui.R
+import com.example.showfinderui.activity.ShowDetailsActivity
 
 class ConcertAdapter(
     private val concertList: List<Concert>,
@@ -32,8 +34,18 @@ class ConcertAdapter(
         holder.location.text = concert.location
 
         holder.itemView.setOnClickListener {
-            onItemClick(concert)
+            val intent = Intent(holder.itemView.context, ShowDetailsActivity::class.java)
+            intent.putExtra("artist_name", concert.artistName)
+            intent.putExtra("location", concert.location)
+            intent.putExtra("image_url", concert.imageUrl)
+            holder.itemView.context.startActivity(intent)
         }
+
+        Glide.with(holder.concertImage.context)
+            .load(concert.imageUrl)
+            .placeholder(R.drawable.menu_gallery_24)
+            .error(R.drawable.menu_gallery_24)
+            .into(holder.concertImage)
 
         if (concert.imageUrl.isNotEmpty()) {
             try {
