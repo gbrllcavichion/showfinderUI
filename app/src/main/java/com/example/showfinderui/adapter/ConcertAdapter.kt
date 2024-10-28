@@ -17,7 +17,6 @@ class ConcertAdapter(
 
     class ConcertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val artistName: TextView = itemView.findViewById(R.id.artist_name)
-        val tourName: TextView = itemView.findViewById(R.id.tour_name)
         val location: TextView = itemView.findViewById(R.id.location)
         val concertImage: ImageView = itemView.findViewById(R.id.image_concert)
     }
@@ -30,30 +29,32 @@ class ConcertAdapter(
     override fun onBindViewHolder(holder: ConcertViewHolder, position: Int) {
         val concert = concertList[position]
         holder.artistName.text = concert.artistName
-        holder.tourName.text = concert.tourName
         holder.location.text = concert.location
 
         holder.itemView.setOnClickListener {
             onItemClick(concert)
         }
 
-        if (position == 0) {
-            Glide.with(holder.concertImage.context)
-                .load(R.drawable.twenty_one_pilots_1200x628)
-                .placeholder(R.drawable.menu_gallery_24)
-                .error(R.drawable.menu_gallery_24)
-                .into(holder.concertImage)
-            holder.concertImage.visibility = View.VISIBLE
+        if (concert.imageUrl.isNotEmpty()) {
+            try {
+                Glide.with(holder.concertImage.context)
+                    .load(concert.imageUrl.toInt())
+                    .placeholder(R.drawable.menu_gallery_24)
+                    .error(R.drawable.menu_gallery_24)
+                    .into(holder.concertImage)
+            } catch (e: NumberFormatException) {
+                Glide.with(holder.concertImage.context)
+                    .load(concert.imageUrl)
+                    .placeholder(R.drawable.menu_gallery_24)
+                    .error(R.drawable.menu_gallery_24)
+                    .into(holder.concertImage)
+            }
         } else {
             Glide.with(holder.concertImage.context)
                 .load(R.drawable.menu_gallery_24)
-                .placeholder(R.drawable.menu_gallery_24)
-                .error(R.drawable.menu_gallery_24)
                 .into(holder.concertImage)
-            holder.concertImage.visibility = View.VISIBLE
         }
     }
-
 
     override fun getItemCount(): Int {
         return concertList.size

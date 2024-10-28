@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="376dp"
         android:layout_height="wrap_content"
         android:text="Show Finder"
         android:textColor="#FFFFFF"
@@ -19,12 +19,12 @@
         android:id="@+id/tv_favorite_artists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="8dp"
         android:text="Seus artistas favoritos"
         android:textColor="#FFFFFF"
-        android:paddingTop="8dp"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp" />
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_concerts_favorite_shows"

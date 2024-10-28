@@ -16,8 +16,9 @@
         android:layout_marginEnd="12dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="287dp"
+        android:layout_height="82dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingStart="12dp">
 
@@ -27,25 +28,16 @@
             android:layout_height="wrap_content"
             android:text="Artist name"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tour_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tour name"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Location"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

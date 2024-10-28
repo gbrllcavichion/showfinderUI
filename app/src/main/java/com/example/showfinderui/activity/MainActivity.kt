@@ -19,15 +19,12 @@ class MainActivity : AppCompatActivity() {
         recyclerViewFavoriteShows.layoutManager = LinearLayoutManager(this)
 
         val concerts = listOf(
-            Concert("Twenty One Pilots", "The Clancy World Tour", "CWB, SP, RJ", ""),
-            Concert("Artist name", "Tour name", "Sigla Locais", ""),
-            Concert("Artist name", "Tour name", "Sigla Locais", "")
+            Concert("Twenty One Pilots", "CWB, SP, RJ", R.drawable.twenty_one_pilots_1200x628.toString())
         )
 
         recyclerViewFavoriteShows.adapter = ConcertAdapter(concerts) { concert ->
             val intent = Intent(this, ShowDetailsActivity::class.java)
             intent.putExtra("artist_name", concert.artistName)
-            intent.putExtra("tour_name", concert.tourName)
             intent.putExtra("location", concert.location)
             startActivity(intent)
         }
@@ -36,15 +33,18 @@ class MainActivity : AppCompatActivity() {
         recyclerViewOthersShows.layoutManager = LinearLayoutManager(this)
 
         val others = listOf(
-            Concert("Artist name", "Tour name", "Sigla Locais", ""),
-            Concert("Artist name", "Tour name", "Sigla Locais", ""),
-            Concert("Artist name", "Tour name", "Sigla Locais", "")
+            Concert("Bring Me The Horizon", "SP", R.drawable.bmth_eventim_222x222.toString()),
+            Concert("Villamix Festival", "SP",  R.drawable.villamix_lineupp_eventim_profile.toString()),
+            Concert("Camarote Placar - Lenny Kravitz", "SP",  R.drawable.lennykravitz_camaroteplacar_eventim_profile.toString()),
+            Concert("Simply Red", "RJ, SP", R.drawable.simplyred_eventim_222x222.toString()),
+            Concert("Busted", "SP", R.drawable.busted_venue_eventim_222x222.toString()),
+            Concert("Victoria De Angelis", "SP", R.drawable.victoria_de_angelis_eventim_222x222.toString())
+
         )
 
         recyclerViewOthersShows.adapter = ConcertAdapter(others) { concert ->
             val intent = Intent(this, ShowDetailsActivity::class.java)
             intent.putExtra("artist_name", concert.artistName)
-            intent.putExtra("tour_name", concert.tourName)
             intent.putExtra("location", concert.location)
             startActivity(intent)
         }
