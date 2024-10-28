@@ -1,6 +1,7 @@
 package com.example.showfinderui.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.showfinderui.model.Concert
 import com.example.showfinderui.R
 import com.example.showfinderui.activity.ShowDetailsActivity
@@ -35,6 +37,8 @@ class ConcertAdapter(
 
         Glide.with(holder.concertImage.context)
             .load(concert.imageResId)
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .placeholder(R.drawable.menu_gallery_24)
             .error(R.drawable.menu_gallery_24)
             .into(holder.concertImage)
