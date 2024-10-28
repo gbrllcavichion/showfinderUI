@@ -3,13 +3,16 @@ package com.example.showfinderui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.showfinderui.R
 import com.example.showfinderui.model.Ticket
 
-class TicketAdapter(private val ticketList: List<Ticket>) :
-    RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
+class TicketAdapter(
+    private val ticketList: List<Ticket>,
+    private val onBellClick: (String, ImageView) -> Unit
+) : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
     class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ticketDate: TextView = itemView.findViewById(R.id.tv_ticket_date)
@@ -18,6 +21,7 @@ class TicketAdapter(private val ticketList: List<Ticket>) :
         val ticketTime: TextView = itemView.findViewById(R.id.tv_ticket_time)
         val ticketLocation: TextView = itemView.findViewById(R.id.tv_ticket_location)
         val ticketPrice: TextView = itemView.findViewById(R.id.tv_ticket_price)
+        val bellIcon: ImageView = itemView.findViewById(R.id.iv_bell)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
@@ -33,6 +37,10 @@ class TicketAdapter(private val ticketList: List<Ticket>) :
         holder.ticketTime.text = ticket.time
         holder.ticketLocation.text = ticket.location
         holder.ticketPrice.text = ticket.price
+
+        holder.bellIcon.setOnClickListener {
+            onBellClick(ticket.abbreviation, holder.bellIcon)
+        }
     }
 
     override fun getItemCount(): Int {
