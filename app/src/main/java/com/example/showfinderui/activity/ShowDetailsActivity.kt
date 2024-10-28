@@ -17,6 +17,7 @@ class ShowDetailsActivity : AppCompatActivity() {
     private var areAllNotificationsEnabled = false
     private val selectedCities = mutableSetOf<String>()
     private val allCities = listOf("CWR", "RJ", "SP")
+    private lateinit var ticketAdapter: TicketAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +56,11 @@ class ShowDetailsActivity : AppCompatActivity() {
             Ticket("SP", "JAN/26, 2025", "DOM", "16H", "Allianz Parque", "R$ 200.00 - R$ 810.00")
         )
 
+        ticketAdapter = TicketAdapter(ticketList, areAllNotificationsEnabled, ::toggleCityNotification)
+
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_tickets)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = TicketAdapter(ticketList, areAllNotificationsEnabled, ::toggleCityNotification)
+        recyclerView.adapter = ticketAdapter
     }
 
     private fun toggleAllNotifications(bellImageView: ImageView) {
@@ -72,11 +75,7 @@ class ShowDetailsActivity : AppCompatActivity() {
             selectedCities.addAll(allCities)
         }
 
-        findViewById<RecyclerView>(R.id.recycler_view_tickets).adapter = TicketAdapter(
-            allCities.map { city -> Ticket(city, "Data", "Dia", "Hora", "Local", "Preço") },
-            areAllNotificationsEnabled,
-            ::toggleCityNotification
-        )
+        ticketAdapter.updateAllNotifications(areAllNotificationsEnabled)
     }
 
     private fun toggleCityNotification(city: String, bellImageView: ImageView) {

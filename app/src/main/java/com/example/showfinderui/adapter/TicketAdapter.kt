@@ -11,7 +11,7 @@ import com.example.showfinderui.model.Ticket
 
 class TicketAdapter(
     private val ticketList: List<Ticket>,
-    private val areAllNotificationsEnabled: Boolean,
+    private var areAllNotificationsEnabled: Boolean,
     private val onNotificationToggle: (String, ImageView) -> Unit
 ) : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
@@ -50,5 +50,10 @@ class TicketAdapter(
 
     override fun getItemCount(): Int {
         return ticketList.size
+    }
+
+    fun updateAllNotifications(enable: Boolean) {
+        areAllNotificationsEnabled = enable
+        notifyDataSetChanged()
     }
 }
