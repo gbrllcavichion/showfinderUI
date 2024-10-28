@@ -57,7 +57,7 @@ class ShowDetailsActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view_tickets)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = TicketAdapter(ticketList, ::toggleCityNotification)
+        recyclerView.adapter = TicketAdapter(ticketList, areAllNotificationsEnabled, ::toggleCityNotification)
     }
 
     private fun toggleAllNotifications(bellImageView: ImageView) {
@@ -72,7 +72,11 @@ class ShowDetailsActivity : AppCompatActivity() {
             selectedCities.addAll(allCities)
         }
 
-        findViewById<RecyclerView>(R.id.recycler_view_tickets).adapter?.notifyDataSetChanged()
+        findViewById<RecyclerView>(R.id.recycler_view_tickets).adapter = TicketAdapter(
+            allCities.map { city -> Ticket(city, "Data", "Dia", "Hora", "Local", "Preço") },
+            areAllNotificationsEnabled,
+            ::toggleCityNotification
+        )
     }
 
     private fun toggleCityNotification(city: String, bellImageView: ImageView) {

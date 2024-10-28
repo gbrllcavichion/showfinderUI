@@ -11,7 +11,8 @@ import com.example.showfinderui.model.Ticket
 
 class TicketAdapter(
     private val ticketList: List<Ticket>,
-    private val onBellClick: (String, ImageView) -> Unit
+    private val areAllNotificationsEnabled: Boolean,
+    private val onNotificationToggle: (String, ImageView) -> Unit
 ) : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
     class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,7 +22,7 @@ class TicketAdapter(
         val ticketTime: TextView = itemView.findViewById(R.id.tv_ticket_time)
         val ticketLocation: TextView = itemView.findViewById(R.id.tv_ticket_location)
         val ticketPrice: TextView = itemView.findViewById(R.id.tv_ticket_price)
-        val bellIcon: ImageView = itemView.findViewById(R.id.iv_bell)
+        val bellImageView: ImageView = itemView.findViewById(R.id.iv_bell)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
@@ -38,8 +39,12 @@ class TicketAdapter(
         holder.ticketLocation.text = ticket.location
         holder.ticketPrice.text = ticket.price
 
-        holder.bellIcon.setOnClickListener {
-            onBellClick(ticket.abbreviation, holder.bellIcon)
+        holder.bellImageView.setImageResource(
+            if (areAllNotificationsEnabled) R.drawable.notifications_filled_24 else R.drawable.notifications_24
+        )
+
+        holder.bellImageView.setOnClickListener {
+            onNotificationToggle(ticket.abbreviation, holder.bellImageView)
         }
     }
 
