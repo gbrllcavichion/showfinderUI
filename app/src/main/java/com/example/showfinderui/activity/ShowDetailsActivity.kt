@@ -50,11 +50,17 @@ class ShowDetailsActivity : AppCompatActivity() {
             toggleAllNotifications(bellImageView)
         }
 
-        val ticketList = listOf(
-            Ticket("CWR", "JAN/22, 2025", "QUA", "17H", "Pedreira Paulo Leminski", "R$ 230.00 - R$ 810.00"),
-            Ticket("RJ", "JAN/24, 2025", "SEX", "18H", "Farmasi Arena", "R$ 165.00 - R$ 810.00"),
-            Ticket("SP", "JAN/26, 2025", "DOM", "16H", "Allianz Parque", "R$ 200.00 - R$ 810.00")
-        )
+        val ticketList = if (artistName == "Bring Me The Horizon") {
+            listOf(
+                Ticket("SP", "NOV/30, 2024", "SÁB", "13H", "Allianz Parque", "R$ 125.00 - R$ 790.00")
+            )
+        } else {
+            listOf(
+                Ticket("CWR", "JAN/22, 2025", "QUA", "17H", "Pedreira Paulo Leminski", "R$ 230.00 - R$ 810.00"),
+                Ticket("RJ", "JAN/24, 2025", "SEX", "18H", "Farmasi Arena", "R$ 165.00 - R$ 810.00"),
+                Ticket("SP", "JAN/26, 2025", "DOM", "16H", "Allianz Parque", "R$ 200.00 - R$ 810.00")
+            )
+        }
 
         ticketAdapter = TicketAdapter(ticketList, areAllNotificationsEnabled, ::toggleCityNotification)
 

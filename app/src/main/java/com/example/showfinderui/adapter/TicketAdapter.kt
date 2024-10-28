@@ -48,9 +48,7 @@ class TicketAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return ticketList.size
-    }
+    override fun getItemCount(): Int = ticketList.size
 
     fun updateAllNotifications(enable: Boolean) {
         areAllNotificationsEnabled = enable
