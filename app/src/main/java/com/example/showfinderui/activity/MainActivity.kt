@@ -19,13 +19,14 @@ class MainActivity : AppCompatActivity() {
         recyclerViewFavoriteShows.layoutManager = LinearLayoutManager(this)
 
         val concerts = listOf(
-            Concert("Twenty One Pilots", "CWB, SP, RJ", R.drawable.twenty_one_pilots_1200x628.toString())
+            Concert("Twenty One Pilots", "CWB, SP, RJ", R.drawable.twenty_one_pilots_1200x628)
         )
 
         recyclerViewFavoriteShows.adapter = ConcertAdapter(concerts) { concert ->
             val intent = Intent(this, ShowDetailsActivity::class.java)
             intent.putExtra("artist_name", concert.artistName)
             intent.putExtra("location", concert.location)
+            intent.putExtra("imageResId", concert.imageResId)
             startActivity(intent)
         }
 
@@ -33,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         recyclerViewOthersShows.layoutManager = LinearLayoutManager(this)
 
         val others = listOf(
-            Concert("Bring Me The Horizon", "SP", R.drawable.bmth_eventim_222x222.toString()),
-            Concert("Villamix Festival", "SP",  R.drawable.villamix_lineupp_eventim_profile.toString()),
-            Concert("Camarote Placar - Lenny Kravitz", "SP",  R.drawable.lennykravitz_camaroteplacar_eventim_profile.toString()),
-            Concert("Simply Red", "RJ, SP", R.drawable.simplyred_eventim_222x222.toString()),
-            Concert("Busted", "SP", R.drawable.busted_venue_eventim_222x222.toString()),
-            Concert("Victoria De Angelis", "SP", R.drawable.victoria_de_angelis_eventim_222x222.toString())
+            Concert("Bring Me The Horizon", "SP", R.drawable.bmth_eventim_222x222),
+            Concert("Villamix Festival", "SP",  R.drawable.villamix_lineupp_eventim_profile),
+            Concert("Camarote Placar - Lenny Kravitz", "SP",  R.drawable.lennykravitz_camaroteplacar_eventim_profile),
+            Concert("Simply Red", "RJ, SP", R.drawable.simplyred_eventim_222x222),
+            Concert("Busted", "SP", R.drawable.busted_venue_eventim_222x222),
+            Concert("Victoria De Angelis", "SP", R.drawable.victoria_de_angelis_eventim_222x222)
 
         )
 
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ShowDetailsActivity::class.java)
             intent.putExtra("artist_name", concert.artistName)
             intent.putExtra("location", concert.location)
+            intent.putExtra("imageResId", concert.imageResId)
             startActivity(intent)
         }
     }

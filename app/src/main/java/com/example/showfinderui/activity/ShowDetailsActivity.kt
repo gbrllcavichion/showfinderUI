@@ -29,7 +29,7 @@ class ShowDetailsActivity : AppCompatActivity() {
 
         val artistName = intent.getStringExtra("artist_name")
         val location = intent.getStringExtra("location")
-        val imageUrl = intent.getStringExtra("image_url")
+        val imageResId = intent.getIntExtra("imageResId", R.drawable.menu_gallery_24)
 
         val artistNameTextView = findViewById<TextView>(R.id.tv_artist_name)
         val showImageView = findViewById<ImageView>(R.id.iv_show_image)
@@ -37,13 +37,13 @@ class ShowDetailsActivity : AppCompatActivity() {
         artistNameTextView.text = artistName
 
         Glide.with(this)
-            .load(imageUrl)
+            .load(imageResId)
             .placeholder(R.drawable.menu_gallery_24)
             .into(showImageView)
 
         val ticketList = if (artistName == "Bring Me The Horizon") {
             listOf(
-                Ticket("SP", "30 November 2024", "SAT", "13:00", "Allianz Parque", "R$ 230.00 - R$ 810.00")
+                Ticket("SP", "NOV/11, 2024", "SAT", "13H", "Allianz Parque", "R$ 125.00 - R$ 790.00")
             )
         } else {
             listOf(

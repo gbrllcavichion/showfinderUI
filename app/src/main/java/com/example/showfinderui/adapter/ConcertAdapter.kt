@@ -33,38 +33,14 @@ class ConcertAdapter(
         holder.artistName.text = concert.artistName
         holder.location.text = concert.location
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, ShowDetailsActivity::class.java)
-            intent.putExtra("artist_name", concert.artistName)
-            intent.putExtra("location", concert.location)
-            intent.putExtra("image_url", concert.imageUrl)
-            holder.itemView.context.startActivity(intent)
-        }
-
         Glide.with(holder.concertImage.context)
-            .load(concert.imageUrl)
+            .load(concert.imageResId)
             .placeholder(R.drawable.menu_gallery_24)
             .error(R.drawable.menu_gallery_24)
             .into(holder.concertImage)
 
-        if (concert.imageUrl.isNotEmpty()) {
-            try {
-                Glide.with(holder.concertImage.context)
-                    .load(concert.imageUrl.toInt())
-                    .placeholder(R.drawable.menu_gallery_24)
-                    .error(R.drawable.menu_gallery_24)
-                    .into(holder.concertImage)
-            } catch (e: NumberFormatException) {
-                Glide.with(holder.concertImage.context)
-                    .load(concert.imageUrl)
-                    .placeholder(R.drawable.menu_gallery_24)
-                    .error(R.drawable.menu_gallery_24)
-                    .into(holder.concertImage)
-            }
-        } else {
-            Glide.with(holder.concertImage.context)
-                .load(R.drawable.menu_gallery_24)
-                .into(holder.concertImage)
+        holder.itemView.setOnClickListener {
+            onItemClick(concert)
         }
     }
 
