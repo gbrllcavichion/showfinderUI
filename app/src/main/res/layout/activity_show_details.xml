@@ -25,17 +25,14 @@
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/twenty_one_pilots_1200x628"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Nome do Artista -->
     <TextView
         android:id="@+id/tv_artist_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Twenty One Pilots"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
