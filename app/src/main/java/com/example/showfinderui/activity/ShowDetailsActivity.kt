@@ -1,16 +1,30 @@
 package com.example.showfinderui.activity
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.showfinderui.R
 import com.example.showfinderui.adapter.TicketAdapter
 import com.example.showfinderui.model.Ticket
+
+private const val CHANNEL_ID = "ticket_notifications"
+private const val REQUEST_NOTIFICATION_PERMISSION = 1
 
 class ShowDetailsActivity : AppCompatActivity() {
 
@@ -22,6 +36,8 @@ class ShowDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_details)
+
+        createNotificationChannel()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -69,6 +85,20 @@ class ShowDetailsActivity : AppCompatActivity() {
         recyclerView.adapter = ticketAdapter
     }
 
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notificações de Ingressos"
+            val descriptionText = "Notificações para ingressos disponíveis nas cidades selecionadas"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     private fun toggleAllNotifications(bellImageView: ImageView) {
         areAllNotificationsEnabled = !areAllNotificationsEnabled
 
@@ -79,6 +109,7 @@ class ShowDetailsActivity : AppCompatActivity() {
         selectedCities.clear()
         if (areAllNotificationsEnabled) {
             selectedCities.addAll(allCities)
+            checkNotificationPermissionAndSend("CWR")
         }
 
         ticketAdapter.updateAllNotifications(areAllNotificationsEnabled)
@@ -91,6 +122,9 @@ class ShowDetailsActivity : AppCompatActivity() {
         } else {
             selectedCities.add(city)
             bellImageView.setImageResource(R.drawable.notifications_filled_24)
+            if (city == "CWR") {
+                checkNotificationPermissionAndSend("CWR")
+            }
         }
 
         val allSelected = selectedCities.size == allCities.size
@@ -98,4 +132,57 @@ class ShowDetailsActivity : AppCompatActivity() {
         mainBell.setImageResource(if (allSelected) R.drawable.notifications_filled_24 else R.drawable.notifications_24)
         areAllNotificationsEnabled = allSelected
     }
+
+
+    private fun sendNotification(city: String) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.notifications_filled_24)
+            .setContentTitle("Ingressos Disponíveis")
+            .setContentText("Pista Normal $city tem ingressos disponíveis")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(city.hashCode(), notificationBuilder.build())
+        }
+    }
+
+    private fun checkNotificationPermissionAndSend(city: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    REQUEST_NOTIFICATION_PERMISSION
+                )
+            } else {
+                sendNotification(city)
+            }
+        } else {
+            sendNotification(city)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendNotification("CWR")
+            } else {
+                Toast.makeText(this, "Permissão para enviar notificações foi negada.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 }
